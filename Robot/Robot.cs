@@ -1,10 +1,11 @@
 ﻿using System;
-using ToyRobot.Common;
 using System.Configuration;
+using ToyRobot.Common;
+using ToyRobot.Interface;
 
-namespace ToyRobot.Model
+namespace ToyRobot
 {
-    class Robot
+    public class Robot : IRobot
     {
         /// <summary>
         /// Table size is readonly, read at the begining of program from appsettings
@@ -15,35 +16,24 @@ namespace ToyRobot.Model
         //x,y coordinates and direction of robot
         private int _x, _y;
         private Direction _face;
+        public bool _inValidState;
 
-        #region Constructors
+        #region Constructor
 
         /// <summary>
         /// Constructor initializing robot to (0,0) position and facing east
         /// </summary>
         public Robot()
         {
-            this._x = 0;
-            this._y = 0;
-            this._face = Direction.EAST;
-        }
-
-        /// <summary>
-        /// Initialiazes robot with coordinates and direction provided by user
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="startDirection"></param>
-        public Robot(int x, int y, Direction startDirection)
-        {
-            this._x = x;
-            this._y = x;
-            this._face = startDirection;
+            this._x = -1;
+            this._y = -1;
+            _inValidState = false;
         }
 
         #endregion
 
         #region Private Methods
+
         private bool IsValidNewPosition(int x, int y)
         {
             if (x < TABLE_SIZE && y < TABLE_SIZE)
@@ -51,14 +41,7 @@ namespace ToyRobot.Model
             else
                 return false;
         }
-
-        private bool IsValidPosition()
-        {
-            if (this._x < TABLE_SIZE && this._y < TABLE_SIZE)
-                return true;
-            else
-                return false;
-        }
+        
         #endregion
 
         #region Commands
@@ -66,9 +49,9 @@ namespace ToyRobot.Model
         /// <summary>
         /// Prints current posotion of robot on console
         /// </summary>
-        public void Report()
+        public string Report()
         {
-            Console.Write("Current Positon: X = " + this._x + " Y = " + this._y + " Face = " + Enum.GetName(typeof(Direction), this._face));
+            return _inValidState ? this._x + "," + this._y + "," + Enum.GetName(typeof(Direction), this._face) : "";
         }
 
         /// <summary>
@@ -82,8 +65,9 @@ namespace ToyRobot.Model
             if (IsValidNewPosition(x, y))
             {
                 this._x = x;
-                this._y = x;
+                this._y = y;
                 this._face = newDirection;
+                _inValidState = true;
             }
         }
 
@@ -92,10 +76,13 @@ namespace ToyRobot.Model
         /// </summary>
         public void Left()
         {
-            if (this._face.Equals(Direction.NORTH))
-                this._face = Direction.WEST;
-            else
-                this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face - 1).ToString(), true);
+            if (_inValidState)
+            {
+                if (this._face.Equals(Direction.NORTH))
+                    this._face = Direction.WEST;
+                else
+                    this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face - 1).ToString(), true);
+            }
         }
 
         /// <summary>
@@ -103,11 +90,13 @@ namespace ToyRobot.Model
         /// </summary>
         public void Right()
         {
-            if (this._face.Equals(Direction.WEST))
-                this._face = Direction.NORTH;
-            else
-                this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face + 1).ToString(), true);
-
+            if (_inValidState)
+            {
+                if (this._face.Equals(Direction.WEST))
+                    this._face = Direction.NORTH;
+                else
+                    this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face + 1).ToString(), true);
+            }
         }
 
         /// <summary>
@@ -115,20 +104,23 @@ namespace ToyRobot.Model
         /// </summary>
         public void Move()
         {
-            switch (this._face)
+            if (_inValidState)
             {
-                case Direction.NORTH:
-                    this._y = this._y == (TABLE_SIZE - 1) ? this._y : this._y + 1;
-                    break;
-                case Direction.EAST:
-                    this._x = this._x == (TABLE_SIZE - 1) ? this._x : this._x + 1;
-                    break;
-                case Direction.SOUTH:
-                    this._y = this._y == 0 ? this._y : this._y - 1;
-                    break;
-                case Direction.WEST:
-                    this._x = this._x == 0 ? this._x : this._x - 1;
-                    break;
+                switch (this._face)
+                {
+                    case Direction.NORTH:
+                        this._y = this._y == (TABLE_SIZE - 1) ? this._y : this._y + 1;
+                        break;
+                    case Direction.EAST:
+                        this._x = this._x == (TABLE_SIZE - 1) ? this._x : this._x + 1;
+                        break;
+                    case Direction.SOUTH:
+                        this._y = this._y == 0 ? this._y : this._y - 1;
+                        break;
+                    case Direction.WEST:
+                        this._x = this._x == 0 ? this._x : this._x - 1;
+                        break;
+                }
             }
         }
 

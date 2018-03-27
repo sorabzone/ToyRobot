@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D80AF8D-DCC5-49F9-BC6C-1F6DE594A3F7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ToyRobot</RootNamespace>
-    <AssemblyName>ToyRobot</AssemblyName>
+    <RootNamespace>ToyRobotSimulator</RootNamespace>
+    <AssemblyName>ToyRobotSimulator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,13 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Enums.cs" />
-    <Compile Include="Model\Robot.cs" />
+    <Compile Include="Model\CommandAurguments.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simulator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Robot\ToyRobot.csproj">
+      <Project>{8849ba41-c691-49f4-9555-2b0e1d9e437e}</Project>
+      <Name>ToyRobot</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
