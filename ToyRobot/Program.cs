@@ -21,7 +21,7 @@ namespace ToyRobotSimulator
 
             if (command.Equals("1"))
             {
-                string[] lines = System.IO.File.ReadAllLines("test.txt");
+                string[] lines = System.IO.File.ReadAllLines(@"TestData\test.txt");
 
                 robotSimulator.FeedCommands(lines);
 
