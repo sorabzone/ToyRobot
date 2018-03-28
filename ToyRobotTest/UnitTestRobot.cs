@@ -7,6 +7,9 @@ namespace ToyRobotTest
     [TestClass]
     public class UnitTestRobot
     {
+        /// <summary>
+        /// Test without valid Place command
+        /// </summary>
         [TestMethod]
         public void Robot_Not_Placed_And_Moved()
         {
@@ -16,6 +19,9 @@ namespace ToyRobotTest
             Assert.IsTrue(string.IsNullOrEmpty(result));
         }
 
+        /// <summary>
+        /// Test with out of bound Place command
+        /// </summary>
         [TestMethod]
         public void Robot_PlacedOutside()
         {
@@ -26,6 +32,9 @@ namespace ToyRobotTest
             Assert.IsTrue(string.IsNullOrEmpty(result));
         }
 
+        /// <summary>
+        /// Test with 2 Place commands
+        /// </summary>
         [TestMethod]
         public void Robot_PlacedInside_PlacedOutside()
         {
@@ -36,6 +45,9 @@ namespace ToyRobotTest
             Assert.AreEqual("2,2,EAST", robot.Report());
         }
 
+        /// <summary>
+        /// Positive test case
+        /// </summary>
         [TestMethod]
         public void Robot_Placed_Moved_Turned_Report()
         {

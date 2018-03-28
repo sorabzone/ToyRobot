@@ -61,7 +61,7 @@
       <Project>{8849ba41-c691-49f4-9555-2b0e1d9e437e}</Project>
       <Name>ToyRobot</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ToyRobot\ToyRobotSimulator.csproj">
+    <ProjectReference Include="..\ToyRobotSimulator\ToyRobotSimulator.csproj">
       <Project>{9d80af8d-dcc5-49f9-bc6c-1f6de594a3f7}</Project>
       <Name>ToyRobotSimulator</Name>
     </ProjectReference>

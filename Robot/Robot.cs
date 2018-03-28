@@ -21,7 +21,7 @@ namespace ToyRobot
         #region Constructor
 
         /// <summary>
-        /// Constructor initializing robot to (0,0) position and facing east
+        /// Constructor initializing robot to (-1,-1) position
         /// </summary>
         public Robot()
         {
@@ -34,14 +34,27 @@ namespace ToyRobot
 
         #region Private Methods
 
+        /// <summary>
+        /// Validates if position is valid or not
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <returns></returns>
         private bool IsValidNewPosition(int x, int y)
         {
-            if (x < TABLE_SIZE && y < TABLE_SIZE)
-                return true;
-            else
-                return false;
+            try
+            {
+                if (x < TABLE_SIZE && y < TABLE_SIZE)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-        
+
         #endregion
 
         #region Commands
@@ -51,7 +64,15 @@ namespace ToyRobot
         /// </summary>
         public string Report()
         {
-            return _inValidState ? this._x + "," + this._y + "," + Enum.GetName(typeof(Direction), this._face) : "";
+            try
+            {
+                return _inValidState ? this._x + "," + this._y + "," + Enum.GetName(typeof(Direction), this._face) : "";
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
         }
 
         /// <summary>
@@ -62,12 +83,19 @@ namespace ToyRobot
         /// <param name="newDirection">Direction</param>
         public void Place(int x, int y, Direction newDirection)
         {
-            if (IsValidNewPosition(x, y))
+            try
             {
-                this._x = x;
-                this._y = y;
-                this._face = newDirection;
-                _inValidState = true;
+                if (IsValidNewPosition(x, y))
+                {
+                    this._x = x;
+                    this._y = y;
+                    this._face = newDirection;
+                    _inValidState = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -76,12 +104,19 @@ namespace ToyRobot
         /// </summary>
         public void Left()
         {
-            if (_inValidState)
+            try
             {
-                if (this._face.Equals(Direction.NORTH))
-                    this._face = Direction.WEST;
-                else
-                    this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face - 1).ToString(), true);
+                if (_inValidState)
+                {
+                    if (this._face.Equals(Direction.NORTH))
+                        this._face = Direction.WEST;
+                    else
+                        this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face - 1).ToString(), true);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -90,12 +125,19 @@ namespace ToyRobot
         /// </summary>
         public void Right()
         {
-            if (_inValidState)
+            try
             {
-                if (this._face.Equals(Direction.WEST))
-                    this._face = Direction.NORTH;
-                else
-                    this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face + 1).ToString(), true);
+                if (_inValidState)
+                {
+                    if (this._face.Equals(Direction.WEST))
+                        this._face = Direction.NORTH;
+                    else
+                        this._face = (Direction)Enum.Parse(typeof(Direction), ((int)this._face + 1).ToString(), true);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -104,23 +146,30 @@ namespace ToyRobot
         /// </summary>
         public void Move()
         {
-            if (_inValidState)
+            try
             {
-                switch (this._face)
+                if (_inValidState)
                 {
-                    case Direction.NORTH:
-                        this._y = this._y == (TABLE_SIZE - 1) ? this._y : this._y + 1;
-                        break;
-                    case Direction.EAST:
-                        this._x = this._x == (TABLE_SIZE - 1) ? this._x : this._x + 1;
-                        break;
-                    case Direction.SOUTH:
-                        this._y = this._y == 0 ? this._y : this._y - 1;
-                        break;
-                    case Direction.WEST:
-                        this._x = this._x == 0 ? this._x : this._x - 1;
-                        break;
+                    switch (this._face)
+                    {
+                        case Direction.NORTH:
+                            this._y = this._y == (TABLE_SIZE - 1) ? this._y : this._y + 1;
+                            break;
+                        case Direction.EAST:
+                            this._x = this._x == (TABLE_SIZE - 1) ? this._x : this._x + 1;
+                            break;
+                        case Direction.SOUTH:
+                            this._y = this._y == 0 ? this._y : this._y - 1;
+                            break;
+                        case Direction.WEST:
+                            this._x = this._x == 0 ? this._x : this._x - 1;
+                            break;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
