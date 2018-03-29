@@ -1,4 +1,3 @@
-# ToyRobot
 Toy Robot Simulator
 =======================
 
@@ -11,10 +10,15 @@ Description
 - Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
 
 Robot will accept following commands:-
+
 PLACE X,Y,F
+
 MOVE
+
 LEFT
+
 RIGHT
+
 REPORT
 	
 - PLACE will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
