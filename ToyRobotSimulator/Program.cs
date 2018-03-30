@@ -18,7 +18,7 @@ namespace ToyRobotSimulator
                 Console.WriteLine("Toy Robot Simulator");
                 Console.WriteLine("-------------------");
                 Console.WriteLine("");
-                Console.WriteLine("Press 1 to read commands from test text file or press any other key to enter manual commands. And Enter");
+                Console.WriteLine("Press 1 to read commands from test.txt file or press any other key to enter manual commands. And press Enter");
                 Console.WriteLine("");
                 string command = Console.ReadLine();
 

@@ -51,6 +51,7 @@ Invalid Commands Rules
 - Any PLACE command that places robot out of board is ignored
 - Any MOVE command that places robot out of board is ignored
 - All commands before a valid PLACE command are ignored
+- PLACE 02,03,NORTH - this command is considered valid because Robot will interpret 02 & 03 as 2 & 3 respectively
 
 
 
