@@ -5,6 +5,9 @@ using ToyRobot.Interface;
 
 namespace ToyRobot
 {
+    /// <summary>
+    /// This class represents Robot that can move around a square table. 
+    /// </summary>
     public class Robot : IRobot
     {
         /// <summary>
@@ -60,7 +63,7 @@ namespace ToyRobot
         #region Commands
 
         /// <summary>
-        /// Prints current posotion of robot on console
+        /// Prints current position of robot in console
         /// </summary>
         public string Report()
         {

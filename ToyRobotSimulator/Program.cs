@@ -24,6 +24,8 @@ namespace ToyRobotSimulator
 
                 Simulator robotSimulator = new Simulator();
 
+                //If user selects "1" then simulator will commands from test.txt file in ToyRobot\ToyRobotSimulator\bin\Debug\TestData\ folder
+                //Else user enter individual commands in console.
                 if (command.Equals("1"))
                 {
                     string[] lines = System.IO.File.ReadAllLines(@"TestData\test.txt");
@@ -40,6 +42,7 @@ namespace ToyRobotSimulator
                         Console.Write("command# : ");
                         command = Console.ReadLine();
 
+                        //User can type 'EXIT' and press enter to exit program
                         if (command.ToUpper() == "EXIT")
                         {
                             Environment.Exit(0);

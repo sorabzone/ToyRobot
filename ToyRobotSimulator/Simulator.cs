@@ -15,9 +15,9 @@ namespace ToyRobotSimulator
         }
 
         /// <summary>
-        /// 
+        /// This method reads commands from an array and sends to robot object.
         /// </summary>
-        /// <param name="lines"></param>
+        /// <param name="lines">array of robot commands</param>
         public void FeedCommands(string[] lines)
         {
             try
@@ -37,9 +37,9 @@ namespace ToyRobotSimulator
         }
 
         /// <summary>
-        /// Executes the incoming command.
+        /// Sends incoming command to robot.
         /// </summary>
-        /// <param name="userInput"></param>
+        /// <param name="userInput">command for robot</param>
         /// <returns></returns>
         public string ExecuteSingleCommand(string userInput)
         {
@@ -82,8 +82,8 @@ namespace ToyRobotSimulator
         /// <summary>
         /// Parse the incoming command 
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="cmdArgs"></param>
+        /// <param name="command">command for robot</param>
+        /// <param name="cmdArgs">returns command arguments</param>
         /// <returns></returns>
         private bool ParseCommand(string command, ref CommandArguments cmdArgs)
         {
@@ -94,6 +94,7 @@ namespace ToyRobotSimulator
                 string[] argDelimiter = command.Split(' ');
 
                 //Check for valid command
+                //Empty command or command with more than 2 string parts is invalid. It also checks spelling
                 if (argDelimiter.Length > 0 && argDelimiter.Length < 3 && Enum.TryParse<Command>(argDelimiter[0], true, out inputCommand))
                 {
                     cmdArgs.Instruction = inputCommand;
@@ -101,7 +102,8 @@ namespace ToyRobotSimulator
                 else
                     return false;
 
-                //Check for non-PLACE commands
+                //PLACE command without coordinates is invalid
+                //non-PLACE command with extra characters/words is invalid
                 if ((cmdArgs.Instruction.Equals(Command.PLACE) && argDelimiter.Length == 1) || (!cmdArgs.Instruction.Equals(Command.PLACE) && argDelimiter.Length == 2))
                 {
                     return false;
