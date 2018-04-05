@@ -47,7 +47,7 @@ namespace ToyRobotSimulator
             {
                 string output = userInput;
                 CommandArguments arguments = new CommandArguments();
-                if (ParseCommand(userInput, ref arguments))
+                if (ParseCommand(userInput, arguments))
                 {
                     switch (arguments.Instruction)
                     {
@@ -85,7 +85,7 @@ namespace ToyRobotSimulator
         /// <param name="command">command for robot</param>
         /// <param name="cmdArgs">returns command arguments</param>
         /// <returns></returns>
-        private bool ParseCommand(string command, ref CommandArguments cmdArgs)
+        private bool ParseCommand(string command, CommandArguments cmdArgs)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace ToyRobotSimulator
                 }
                 else if (cmdArgs.Instruction.Equals(Command.PLACE) && argDelimiter.Length == 2)
                 {
-                    return ParseArguments(argDelimiter[1], ref cmdArgs);
+                    return ParseArguments(argDelimiter[1], cmdArgs);
                 }
 
                 return true;
@@ -127,7 +127,7 @@ namespace ToyRobotSimulator
         /// <param name="arguments"></param>
         /// <param name="cmdArgs"></param>
         /// <returns></returns>
-        private bool ParseArguments(string arguments, ref CommandArguments cmdArgs)
+        private bool ParseArguments(string arguments, CommandArguments cmdArgs)
         {
             try
             {
